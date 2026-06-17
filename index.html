@@ -215,7 +215,7 @@
             height: 11px;
         }
 
-        /* ----- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) ----- */
+        /* ----- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР ----- */
         .music-player-section {
             width: 100%;
             background: #ffffff;
@@ -279,7 +279,7 @@
             display: none;
         }
 
-        /* ----- ОБЩАЯ АНИМАЦИЯ FADE-UP (ЗАМЕДЛЕННАЯ) ----- */
+        /* ----- ОБЩАЯ АНИМАЦИЯ FADE-UP ----- */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
@@ -584,7 +584,8 @@
         .dresscode-container { max-width: 450px; margin: 0 auto; text-align: center; }
 
         .dresscode-ornament {
-            width: 140px;
+            width: 100%;
+            max-width: 280px;
             height: auto;
             margin: 0 auto 20px;
             display: block;
@@ -778,13 +779,14 @@
             .name-line { font-size: 3.4rem; }
             .ampersand-between { font-size: 7rem; left: -10px; top: 56%; }
             .yana-name { margin-left: 110px; margin-top: -5px; }
+            .dresscode-ornament { max-width: 220px; }
         }
         @media (max-width: 580px) {
             .name-line { font-size: 2.8rem; }
             .ampersand-between { font-size: 5.5rem; left: -8px; top: 54%; }
             .yana-name { margin-left: 90px; margin-top: -5px; }
             .name-item { font-size: 36px; letter-spacing: 4px; }
-            .dresscode-ornament { width: 100px; }
+            .dresscode-ornament { max-width: 180px; }
         }
         @media (max-width: 480px) {
             .name-line { font-size: 2.4rem; }
@@ -794,7 +796,7 @@
             .checkbox-group { gap: 10px; }
             .checkbox-group label { font-size: 13px; }
             .radio-group-horizontal { flex-direction: column; gap: 10px; }
-            .dresscode-ornament { width: 80px; }
+            .dresscode-ornament { max-width: 150px; }
         }
     </style>
 </head>
@@ -822,7 +824,6 @@
     <div class="music-player-inner">
         <div class="music-controls">
             <button class="music-btn" id="playPauseBtn">
-                <!-- Иконка паузы (две полоски) по умолчанию -->
                 <svg viewBox="0 0 24 24" id="pauseIcon">
                     <rect x="6" y="4" width="4" height="16" />
                     <rect x="14" y="4" width="4" height="16" />
@@ -914,7 +915,7 @@
 <!-- ДРЕСС-КОД -->
 <div class="dresscode-screen" id="dresscodeScreen">
     <div class="dresscode-container">
-        <!-- ВЕНЗЕЛЬ PNG увеличенный -->
+        <!-- ВЕНЗЕЛЬ PNG увеличенный и растянутый -->
         <div class="dresscode-ornament fade-up">
             <img src="вензель.png" alt="Вензель">
         </div>
@@ -1242,7 +1243,6 @@
 
         playBtn.addEventListener('click', togglePlay);
 
-        // Автозапуск с паузой по умолчанию
         audio.volume = 0.6;
         audio.play().then(() => {
             isPlaying = true;

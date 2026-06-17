@@ -95,7 +95,7 @@
         .wedding-script {
             font-family: 'Parisienne', cursive;
             font-size: 3.2rem;
-            color: rgba(255,248,235,0.92);
+            color: #ffffff;
             text-shadow: 0 1px 8px rgba(0,0,0,0.2);
             margin-top: 0.5vh;
             opacity: 0;
@@ -129,7 +129,7 @@
             font-size: 4.2rem;
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: #fffcf5;
+            color: #ffffff;
             text-shadow: 0 2px 14px rgba(0,0,0,0.45);
             opacity: 0;
             line-height: 1.1;
@@ -218,7 +218,7 @@
         /* ----- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) ----- */
         .music-player-section {
             width: 100%;
-            background: #f9f7f5;
+            background: #ffffff;
             padding: 35px 20px;
             display: flex;
             justify-content: center;
@@ -244,8 +244,8 @@
             background: #1a1a1a;
             border: none;
             color: #fff;
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             cursor: pointer;
             transition: background 0.2s ease, transform 0.2s ease;
@@ -260,8 +260,8 @@
             transform: scale(1.05);
         }
         .music-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: #fff;
         }
         .music-status {
@@ -273,6 +273,7 @@
             opacity: 0.4;
             min-width: 110px;
             text-align: center;
+            margin-top: 2px;
         }
         audio {
             display: none;
@@ -583,7 +584,7 @@
         .dresscode-container { max-width: 450px; margin: 0 auto; text-align: center; }
 
         .dresscode-ornament {
-            width: 80px;
+            width: 140px;
             height: auto;
             margin: 0 auto 20px;
             display: block;
@@ -783,6 +784,7 @@
             .ampersand-between { font-size: 5.5rem; left: -8px; top: 54%; }
             .yana-name { margin-left: 90px; margin-top: -5px; }
             .name-item { font-size: 36px; letter-spacing: 4px; }
+            .dresscode-ornament { width: 100px; }
         }
         @media (max-width: 480px) {
             .name-line { font-size: 2.4rem; }
@@ -792,6 +794,7 @@
             .checkbox-group { gap: 10px; }
             .checkbox-group label { font-size: 13px; }
             .radio-group-horizontal { flex-direction: column; gap: 10px; }
+            .dresscode-ornament { width: 80px; }
         }
     </style>
 </head>
@@ -814,7 +817,7 @@
     </div>
 </div>
 
-<!-- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) -->
+<!-- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР -->
 <div class="music-player-section" id="musicSection">
     <div class="music-player-inner">
         <div class="music-controls">
@@ -828,8 +831,8 @@
                     <polygon points="5,3 19,12 5,21" />
                 </svg>
             </button>
-            <span class="music-status" id="musicStatus">⏸ На паузу</span>
         </div>
+        <span class="music-status" id="musicStatus">На паузу</span>
         <audio id="audioPlayer" loop>
             <source src="акмаль.mp3" type="audio/mpeg">
             Ваш браузер не поддерживает аудио.
@@ -911,7 +914,7 @@
 <!-- ДРЕСС-КОД -->
 <div class="dresscode-screen" id="dresscodeScreen">
     <div class="dresscode-container">
-        <!-- ВЕНЗЕЛЬ PNG -->
+        <!-- ВЕНЗЕЛЬ PNG увеличенный -->
         <div class="dresscode-ornament fade-up">
             <img src="вензель.png" alt="Вензель">
         </div>
@@ -1212,7 +1215,7 @@
             });
         }
 
-        // ---- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) ----
+        // ---- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР ----
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playPauseBtn');
         const pauseIcon = document.getElementById('pauseIcon');
@@ -1226,13 +1229,13 @@
                 audio.pause();
                 pauseIcon.style.display = 'none';
                 playIcon.style.display = 'block';
-                musicStatus.textContent = '▶ Включить музыку';
+                musicStatus.textContent = 'Включить музыку';
                 isPlaying = false;
             } else {
                 audio.play();
                 pauseIcon.style.display = 'block';
                 playIcon.style.display = 'none';
-                musicStatus.textContent = '⏸ На паузу';
+                musicStatus.textContent = 'На паузу';
                 isPlaying = true;
             }
         }
@@ -1245,13 +1248,12 @@
             isPlaying = true;
             pauseIcon.style.display = 'block';
             playIcon.style.display = 'none';
-            musicStatus.textContent = '⏸ На паузу';
+            musicStatus.textContent = 'На паузу';
         }).catch(() => {
-            // Автозапуск заблокирован — показываем кнопку воспроизведения
             isPlaying = false;
             pauseIcon.style.display = 'none';
             playIcon.style.display = 'block';
-            musicStatus.textContent = '▶ Включить музыку';
+            musicStatus.textContent = 'Включить музыку';
         });
 
     })();

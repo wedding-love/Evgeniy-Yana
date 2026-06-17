@@ -215,12 +215,11 @@
             height: 11px;
         }
 
-        /* ----- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (между первым и вторым экраном) ----- */
+        /* ----- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) ----- */
         .music-player-section {
-            position: relative;
             width: 100%;
             background: #f9f7f5;
-            padding: 30px 20px;
+            padding: 35px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -231,67 +230,48 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             max-width: 450px;
             width: 100%;
-        }
-        .music-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #1a1a1a;
-            opacity: 0.5;
-            margin-bottom: 2px;
         }
         .music-controls {
             display: flex;
             align-items: center;
-            gap: 25px;
-            width: 100%;
+            gap: 20px;
             justify-content: center;
         }
         .music-btn {
             background: #1a1a1a;
             border: none;
             color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.6rem;
-            letter-spacing: 1.5px;
-            padding: 8px 22px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: background 0.2s ease;
-            text-transform: uppercase;
-            border-radius: 0;
+            transition: background 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            line-height: 1;
         }
         .music-btn:hover {
             background: #333;
+            transform: scale(1.05);
         }
-        .music-btn.pause-btn {
-            background: #555;
+        .music-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
         }
-        .music-btn.pause-btn:hover {
-            background: #444;
-        }
-        .music-progress {
-            flex: 1;
-            height: 2px;
-            background: #ddd;
-            max-width: 160px;
-            position: relative;
-            cursor: pointer;
-        }
-        .music-progress-bar {
-            height: 100%;
-            width: 0%;
-            background: #1a1a1a;
-            transition: width 0.1s linear;
-        }
-        .music-time {
+        .music-status {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.6rem;
-            color: #999;
-            min-width: 70px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            opacity: 0.4;
+            min-width: 110px;
             text-align: center;
         }
         audio {
@@ -550,7 +530,7 @@
             gap: 12px;
             margin-top: 8px;
         }
-        .btn-maps, .btn-instagram {
+        .btn-instagram {
             display: inline-block;
             background: #1a1a1a;
             color: #fff;
@@ -563,13 +543,10 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: background 0.2s;
-        }
-        .btn-maps:hover { background: #333; }
-        .btn-instagram {
-            background: #d62976;
+            border: none;
         }
         .btn-instagram:hover {
-            background: #c13584;
+            background: #333;
         }
 
         /* ----- ТАЙМИНГ ----- */
@@ -604,6 +581,20 @@
         /* ----- ДРЕСС-КОД ----- */
         .dresscode-screen { background: #fff; padding: 40px 16px 60px; }
         .dresscode-container { max-width: 450px; margin: 0 auto; text-align: center; }
+
+        .dresscode-ornament {
+            width: 80px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+            opacity: 0.6;
+        }
+        .dresscode-ornament img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .dresscode-main-title {
             font-family: 'Lighthaus', 'Quicksand', sans-serif;
             font-weight: 400;
@@ -611,32 +602,6 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 24px;
-            position: relative;
-            display: inline-block;
-        }
-        .dresscode-main-title::before {
-            content: "❧";
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 300;
-            color: #1a1a1a;
-            opacity: 0.2;
-            position: absolute;
-            left: -55px;
-            top: 50%;
-            transform: translateY(-50%) scale(1.4);
-        }
-        .dresscode-main-title::after {
-            content: "❧";
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 300;
-            color: #1a1a1a;
-            opacity: 0.2;
-            position: absolute;
-            right: -55px;
-            top: 50%;
-            transform: translateY(-50%) scale(1.4) scaleX(-1);
         }
         .dresscode-description { font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.7; color: #333; max-width: 340px; margin: 0 auto; }
 
@@ -818,10 +783,6 @@
             .ampersand-between { font-size: 5.5rem; left: -8px; top: 54%; }
             .yana-name { margin-left: 90px; margin-top: -5px; }
             .name-item { font-size: 36px; letter-spacing: 4px; }
-            .dresscode-main-title::before,
-            .dresscode-main-title::after {
-                display: none;
-            }
         }
         @media (max-width: 480px) {
             .name-line { font-size: 2.4rem; }
@@ -831,8 +792,6 @@
             .checkbox-group { gap: 10px; }
             .checkbox-group label { font-size: 13px; }
             .radio-group-horizontal { flex-direction: column; gap: 10px; }
-            .music-controls { flex-wrap: wrap; gap: 12px; }
-            .music-progress { max-width: 100%; width: 100%; }
         }
     </style>
 </head>
@@ -855,16 +814,21 @@
     </div>
 </div>
 
-<!-- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР -->
+<!-- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) -->
 <div class="music-player-section" id="musicSection">
     <div class="music-player-inner">
-        <div class="music-label">♫ Наша музыка</div>
         <div class="music-controls">
-            <button class="music-btn" id="playPauseBtn">⏸ Пауза</button>
-            <div class="music-progress" id="progressContainer">
-                <div class="music-progress-bar" id="progressBar"></div>
-            </div>
-            <span class="music-time" id="timeDisplay">0:00 / 0:00</span>
+            <button class="music-btn" id="playPauseBtn">
+                <!-- Иконка паузы (две полоски) по умолчанию -->
+                <svg viewBox="0 0 24 24" id="pauseIcon">
+                    <rect x="6" y="4" width="4" height="16" />
+                    <rect x="14" y="4" width="4" height="16" />
+                </svg>
+                <svg viewBox="0 0 24 24" id="playIcon" style="display:none;">
+                    <polygon points="5,3 19,12 5,21" />
+                </svg>
+            </button>
+            <span class="music-status" id="musicStatus">⏸ На паузу</span>
         </div>
         <audio id="audioPlayer" loop>
             <source src="акмаль.mp3" type="audio/mpeg">
@@ -914,8 +878,7 @@
         <p class="venue-name">Усадьба Полянка</p>
         <p class="venue-address">д. Румино, ул. Центральная, д. 46</p>
         <div class="location-links">
-            <a href="https://yandex.by/maps/29633/vitebsk-district/house/Z0kYcgFjTEwBQFtufXh1eH9lYg==/?ll=30.463596%2C54.449366&z=16.26" target="_blank" class="btn-maps">Как добраться</a>
-            <a href="https://www.instagram.com/usadba.polianka?igsh=YjEwOTlicjF6amJy" target="_blank" class="btn-instagram">Instagram</a>
+            <a href="https://www.instagram.com/usadba.polianka?igsh=YjEwOTlicjF6amJy" target="_blank" class="btn-instagram">Instagram усадьбы</a>
         </div>
     </div>
 </div>
@@ -948,6 +911,10 @@
 <!-- ДРЕСС-КОД -->
 <div class="dresscode-screen" id="dresscodeScreen">
     <div class="dresscode-container">
+        <!-- ВЕНЗЕЛЬ -->
+        <div class="dresscode-ornament fade-up">
+            <img src="вензель.png" alt="Вензель">
+        </div>
         <h1 class="dresscode-main-title fade-up">Дресс-код</h1>
         <p class="dresscode-description fade-up">Дресс-код без ограничений! Мы очень ждем и готовимся к нашему незабываемому дню! Поддержите нас Вашими улыбками и объятиями, а также красивыми нарядами!</p>
     </div>
@@ -1245,71 +1212,46 @@
             });
         }
 
-        // ---- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР ----
+        // ---- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (упрощенный) ----
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playPauseBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressContainer = document.getElementById('progressContainer');
-        const timeDisplay = document.getElementById('timeDisplay');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const playIcon = document.getElementById('playIcon');
+        const musicStatus = document.getElementById('musicStatus');
 
         let isPlaying = false;
-
-        function formatTime(seconds) {
-            const m = Math.floor(seconds / 60);
-            const s = Math.floor(seconds % 60);
-            return `${m}:${s.toString().padStart(2, '0')}`;
-        }
-
-        function updateProgress() {
-            if (audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = percent + '%';
-                timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
-            }
-        }
 
         function togglePlay() {
             if (isPlaying) {
                 audio.pause();
-                playBtn.textContent = '▶ Воспр.';
-                playBtn.classList.remove('pause-btn');
+                pauseIcon.style.display = 'none';
+                playIcon.style.display = 'block';
+                musicStatus.textContent = '▶ Включить музыку';
+                isPlaying = false;
             } else {
                 audio.play();
-                playBtn.textContent = '⏸ Пауза';
-                playBtn.classList.add('pause-btn');
+                pauseIcon.style.display = 'block';
+                playIcon.style.display = 'none';
+                musicStatus.textContent = '⏸ На паузу';
+                isPlaying = true;
             }
-            isPlaying = !isPlaying;
         }
 
-        audio.addEventListener('loadedmetadata', () => {
-            timeDisplay.textContent = '0:00 / ' + formatTime(audio.duration);
-        });
-
-        audio.addEventListener('timeupdate', updateProgress);
-
         playBtn.addEventListener('click', togglePlay);
-
-        progressContainer.addEventListener('click', (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const width = rect.width;
-            const percent = clickX / width;
-            if (audio.duration) {
-                audio.currentTime = percent * audio.duration;
-            }
-        });
 
         // Автозапуск с паузой по умолчанию
         audio.volume = 0.6;
         audio.play().then(() => {
             isPlaying = true;
-            playBtn.textContent = '⏸ Пауза';
-            playBtn.classList.add('pause-btn');
+            pauseIcon.style.display = 'block';
+            playIcon.style.display = 'none';
+            musicStatus.textContent = '⏸ На паузу';
         }).catch(() => {
-            // Автозапуск заблокирован браузером — кнопка остаётся "Воспр."
+            // Автозапуск заблокирован — показываем кнопку воспроизведения
             isPlaying = false;
-            playBtn.textContent = '▶ Воспр.';
-            playBtn.classList.remove('pause-btn');
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+            musicStatus.textContent = '▶ Включить музыку';
         });
 
     })();

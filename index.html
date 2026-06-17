@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Приглашение на свадьбу | Евгений & Яна</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@100;200;300;400;500;700;800&family=Parisienne&family=Pinyon+Script&display=swap" rel="stylesheet">
-    
+
     <style>
         @font-face {
             font-family: 'Lighthaus';
@@ -144,7 +144,6 @@
         .yana-name {
             transform: translateX(35px);
             transition: opacity 2.5s cubic-bezier(0.2,0.9,0.3,1.1), transform 2.5s cubic-bezier(0.2,0.9,0.3,1.1);
-            /* Отступ слева, чтобы «а» оказалась под «й» */
             margin-left: 135px;
             margin-top: -6px;
         }
@@ -214,6 +213,89 @@
             margin-left: 8px;
             width: 11px;
             height: 11px;
+        }
+
+        /* ----- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР (между первым и вторым экраном) ----- */
+        .music-player-section {
+            position: relative;
+            width: 100%;
+            background: #f9f7f5;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid rgba(26, 26, 26, 0.05);
+            border-bottom: 1px solid rgba(26, 26, 26, 0.05);
+        }
+        .music-player-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            max-width: 450px;
+            width: 100%;
+        }
+        .music-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            opacity: 0.5;
+            margin-bottom: 2px;
+        }
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            justify-content: center;
+        }
+        .music-btn {
+            background: #1a1a1a;
+            border: none;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 1.5px;
+            padding: 8px 22px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            text-transform: uppercase;
+            border-radius: 0;
+        }
+        .music-btn:hover {
+            background: #333;
+        }
+        .music-btn.pause-btn {
+            background: #555;
+        }
+        .music-btn.pause-btn:hover {
+            background: #444;
+        }
+        .music-progress {
+            flex: 1;
+            height: 2px;
+            background: #ddd;
+            max-width: 160px;
+            position: relative;
+            cursor: pointer;
+        }
+        .music-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #1a1a1a;
+            transition: width 0.1s linear;
+        }
+        .music-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            color: #999;
+            min-width: 70px;
+            text-align: center;
+        }
+        audio {
+            display: none;
         }
 
         /* ----- ОБЩАЯ АНИМАЦИЯ FADE-UP (ЗАМЕДЛЕННАЯ) ----- */
@@ -449,7 +531,7 @@
             font-weight: 700;
             line-height: 1.5;
             max-width: 280px;
-            margin: 0 auto 30px;
+            margin: 0 auto 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #1a1a1a;
@@ -459,22 +541,36 @@
             font-size: 0.85rem;
             font-weight: 300;
             color: #555;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        .btn-maps {
+        .location-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .btn-maps, .btn-instagram {
             display: inline-block;
             background: #1a1a1a;
             color: #fff;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 400;
-            letter-spacing: 2px;
-            padding: 12px 30px;
+            letter-spacing: 1.5px;
+            padding: 10px 20px;
             text-transform: uppercase;
             cursor: pointer;
+            transition: background 0.2s;
         }
         .btn-maps:hover { background: #333; }
+        .btn-instagram {
+            background: #d62976;
+        }
+        .btn-instagram:hover {
+            background: #c13584;
+        }
 
         /* ----- ТАЙМИНГ ----- */
         .timeline-screen { background: #fff; padding: 50px 20px 60px; }
@@ -508,7 +604,40 @@
         /* ----- ДРЕСС-КОД ----- */
         .dresscode-screen { background: #fff; padding: 40px 16px 60px; }
         .dresscode-container { max-width: 450px; margin: 0 auto; text-align: center; }
-        .dresscode-main-title { font-family: 'Lighthaus', 'Quicksand', sans-serif; font-weight: 400; font-size: 42px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 24px; }
+        .dresscode-main-title {
+            font-family: 'Lighthaus', 'Quicksand', sans-serif;
+            font-weight: 400;
+            font-size: 42px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+            position: relative;
+            display: inline-block;
+        }
+        .dresscode-main-title::before {
+            content: "❧";
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #1a1a1a;
+            opacity: 0.2;
+            position: absolute;
+            left: -55px;
+            top: 50%;
+            transform: translateY(-50%) scale(1.4);
+        }
+        .dresscode-main-title::after {
+            content: "❧";
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: #1a1a1a;
+            opacity: 0.2;
+            position: absolute;
+            right: -55px;
+            top: 50%;
+            transform: translateY(-50%) scale(1.4) scaleX(-1);
+        }
         .dresscode-description { font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.7; color: #333; max-width: 340px; margin: 0 auto; }
 
         /* ----- ТАЙМЕР ----- */
@@ -559,7 +688,7 @@
         .form-group label { display: block; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #1a1a1a; }
         .form-group input, .form-group select { width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid #ddd; font-family: 'Montserrat', sans-serif; font-size: 16px; background: transparent; outline: none; color: #1a1a1a; }
         .form-group input:focus, .form-group select:focus { border-bottom-color: #1a1a1a; }
-        
+
         .radio-group-vertical {
             display: flex;
             flex-direction: column;
@@ -584,7 +713,7 @@
             cursor: pointer;
             flex-shrink: 0;
         }
-        
+
         .radio-group-horizontal {
             display: flex;
             gap: 25px;
@@ -605,7 +734,7 @@
             width: auto;
             accent-color: #1a1a1a;
         }
-        
+
         .checkbox-group {
             display: flex;
             flex-direction: column;
@@ -689,6 +818,10 @@
             .ampersand-between { font-size: 5.5rem; left: -8px; top: 54%; }
             .yana-name { margin-left: 90px; margin-top: -5px; }
             .name-item { font-size: 36px; letter-spacing: 4px; }
+            .dresscode-main-title::before,
+            .dresscode-main-title::after {
+                display: none;
+            }
         }
         @media (max-width: 480px) {
             .name-line { font-size: 2.4rem; }
@@ -698,6 +831,8 @@
             .checkbox-group { gap: 10px; }
             .checkbox-group label { font-size: 13px; }
             .radio-group-horizontal { flex-direction: column; gap: 10px; }
+            .music-controls { flex-wrap: wrap; gap: 12px; }
+            .music-progress { max-width: 100%; width: 100%; }
         }
     </style>
 </head>
@@ -717,6 +852,24 @@
             </div>
         </div>
         <div class="scroll-down" id="scrollBtn">Листайте вниз<svg class="arrow-icon-svg" viewBox="0 0 10 10"><polyline points="1,3 5,7 9,3" style="fill:none; stroke:black; stroke-width:1.2;"/></svg></div>
+    </div>
+</div>
+
+<!-- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР -->
+<div class="music-player-section" id="musicSection">
+    <div class="music-player-inner">
+        <div class="music-label">♫ Наша музыка</div>
+        <div class="music-controls">
+            <button class="music-btn" id="playPauseBtn">⏸ Пауза</button>
+            <div class="music-progress" id="progressContainer">
+                <div class="music-progress-bar" id="progressBar"></div>
+            </div>
+            <span class="music-time" id="timeDisplay">0:00 / 0:00</span>
+        </div>
+        <audio id="audioPlayer" loop>
+            <source src="акмаль.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио.
+        </audio>
     </div>
 </div>
 
@@ -760,7 +913,10 @@
         <div class="save-the-place">Save the place!</div>
         <p class="venue-name">Усадьба Полянка</p>
         <p class="venue-address">д. Румино, ул. Центральная, д. 46</p>
-        <a href="https://yandex.by/maps/29633/vitebsk-district/house/Z0kYcgFjTEwBQFtufXh1eH9lYg==/?ll=30.463596%2C54.449366&z=16.26" target="_blank" class="btn-maps">Как добраться</a>
+        <div class="location-links">
+            <a href="https://yandex.by/maps/29633/vitebsk-district/house/Z0kYcgFjTEwBQFtufXh1eH9lYg==/?ll=30.463596%2C54.449366&z=16.26" target="_blank" class="btn-maps">Как добраться</a>
+            <a href="https://www.instagram.com/usadba.polianka?igsh=YjEwOTlicjF6amJy" target="_blank" class="btn-instagram">Instagram</a>
+        </div>
     </div>
 </div>
 
@@ -774,11 +930,12 @@
             <div class="timeline-item slide-left">
                 <div class="time">13:00</div>
                 <div class="timeline-desc">Торжественная регистрация брака в ЗАГСЕ г. Дубровно</div>
-                <a href="https://yandex.by/maps/org/zags/213108109139/?ll=30.057267%2C54.571283&z=15" target="_blank" class="btn-route-timeline">Показать маршрут</a>
+                <a href="https://yandex.by/maps/org/zags/50185789893/?ll=30.689693%2C54.571371&z=15" target="_blank" class="btn-route-timeline">Показать маршрут</a>
             </div>
             <div class="timeline-item slide-left">
                 <div class="time">14:30</div>
                 <div class="timeline-desc">Сбор гостей в усадьбе Полянка</div>
+                <a href="https://yandex.by/maps/29633/vitebsk-district/house/Z0kYcgFjTEwBQFtufXh1eH9lYg==/?ll=30.463596%2C54.449366&z=16.26" target="_blank" class="btn-route-timeline">Как добраться до усадьбы</a>
             </div>
             <div class="timeline-item slide-right">
                 <div class="time">23:00</div>
@@ -863,7 +1020,7 @@
                     <option value="5">5 человек</option>
                 </select>
             </div>
-            
+
             <div class="form-group rsvp-animate">
                 <label>Нужно ли место для ночлега?</label>
                 <div class="radio-group-vertical">
@@ -871,7 +1028,7 @@
                     <label><input type="radio" name="overnight" value="no" checked> Нет, не нужно</label>
                 </div>
             </div>
-            
+
             <div class="form-group rsvp-animate">
                 <label>Желаете ли остаться на второй день праздника?</label>
                 <div class="radio-group-vertical">
@@ -1087,6 +1244,74 @@
                 setTimeout(() => { messageDiv.style.display = 'none'; }, 4000);
             });
         }
+
+        // ---- МУЗЫКАЛЬНЫЙ ПЛЕЙЕР ----
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const timeDisplay = document.getElementById('timeDisplay');
+
+        let isPlaying = false;
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function updateProgress() {
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = percent + '%';
+                timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+            }
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.textContent = '▶ Воспр.';
+                playBtn.classList.remove('pause-btn');
+            } else {
+                audio.play();
+                playBtn.textContent = '⏸ Пауза';
+                playBtn.classList.add('pause-btn');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            timeDisplay.textContent = '0:00 / ' + formatTime(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', updateProgress);
+
+        playBtn.addEventListener('click', togglePlay);
+
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const percent = clickX / width;
+            if (audio.duration) {
+                audio.currentTime = percent * audio.duration;
+            }
+        });
+
+        // Автозапуск с паузой по умолчанию
+        audio.volume = 0.6;
+        audio.play().then(() => {
+            isPlaying = true;
+            playBtn.textContent = '⏸ Пауза';
+            playBtn.classList.add('pause-btn');
+        }).catch(() => {
+            // Автозапуск заблокирован браузером — кнопка остаётся "Воспр."
+            isPlaying = false;
+            playBtn.textContent = '▶ Воспр.';
+            playBtn.classList.remove('pause-btn');
+        });
+
     })();
 </script>
 </body>

@@ -881,27 +881,27 @@
         <form id="guestForm" action="https://formspree.io/f/mykaodlp" method="POST">
             <div class="form-group rsvp-animate">
                 <label>Ваше имя и фамилия</label>
-                <input type="text" name="name" id="guestName" placeholder="Например, Анна Петрова" required>
+                <input type="text" name="Имя и фамилия" id="guestName" placeholder="Например, Анна Петрова" required>
             </div>
             <div class="form-group rsvp-animate">
                 <label>Планируете присутствовать?</label>
                 <div class="radio-group-horizontal">
-                    <label><input type="radio" name="attendance" value="yes" required> Да, с радостью!</label>
-                    <label><input type="radio" name="attendance" value="no"> К сожалению, нет</label>
+                    <label><input type="radio" name="Присутствие" value="Да, с радостью!" required> Да, с радостью!</label>
+                    <label><input type="radio" name="Присутствие" value="Нет, к сожалению"> К сожалению, нет</label>
                 </div>
             </div>
             <div class="form-group rsvp-animate">
                 <label>Один или с кем-то?</label>
-                <select name="companion" id="companion">
-                    <option value="alone">Один/одна</option>
-                    <option value="with_partner">С партнёром/партнёршей</option>
-                    <option value="with_family">С семьёй</option>
-                    <option value="with_friends">С друзьями</option>
+                <select name="С кем придет" id="companion">
+                    <option value="Один/одна">Один/одна</option>
+                    <option value="С партнёром/партнёршей">С партнёром/партнёршей</option>
+                    <option value="С семьёй">С семьёй</option>
+                    <option value="С друзьями">С друзьями</option>
                 </select>
             </div>
             <div class="form-group rsvp-animate">
                 <label>Количество гостей (включая вас)</label>
-                <select name="guest_count" id="guestCount">
+                <select name="Количество гостей" id="guestCount">
                     <option value="1">Только я</option>
                     <option value="2">2 человека</option>
                     <option value="3">3 человека</option>
@@ -913,36 +913,36 @@
             <div class="form-group rsvp-animate">
                 <label>Нужно ли место для ночлега?</label>
                 <div class="radio-group-vertical">
-                    <label><input type="radio" name="overnight" value="yes"> Да, нужно</label>
-                    <label><input type="radio" name="overnight" value="no"> Нет, не нужно</label>
+                    <label><input type="radio" name="Ночлег" value="Да, нужно"> Да, нужно</label>
+                    <label><input type="radio" name="Ночлег" value="Нет, не нужно"> Нет, не нужно</label>
                 </div>
             </div>
 
             <div class="form-group rsvp-animate">
                 <label>Желаете ли остаться на второй день праздника?</label>
                 <div class="radio-group-vertical">
-                    <label><input type="radio" name="second_day" value="yes"> Да, с удовольствием!</label>
-                    <label><input type="radio" name="second_day" value="no"> Нет, не смогу</label>
+                    <label><input type="radio" name="Второй день" value="Да, с удовольствием!"> Да, с удовольствием!</label>
+                    <label><input type="radio" name="Второй день" value="Нет, не смогу"> Нет, не смогу</label>
                 </div>
             </div>
             <div class="form-group rsvp-animate">
                 <label>Выберите ваши любимые напитки</label>
                 <div class="checkbox-group">
-                    <label><input type="checkbox" name="drink_vodka" value="vodka"> Водка</label>
-                    <label><input type="checkbox" name="drink_cognac" value="cognac"> Коньяк</label>
-                    <label><input type="checkbox" name="drink_wine" value="wine"> Вино</label>
-                    <label><input type="checkbox" name="drink_champagne" value="champagne"> Шампанское</label>
-                    <label><input type="checkbox" name="drink_soft" value="soft"> Безалкогольное</label>
-                    <label><input type="checkbox" id="drinkOtherCheck" name="drink_other" value="other"> Другое</label>
+                    <label><input type="checkbox" name="Напитки" value="Водка"> Водка</label>
+                    <label><input type="checkbox" name="Напитки" value="Коньяк"> Коньяк</label>
+                    <label><input type="checkbox" name="Напитки" value="Вино"> Вино</label>
+                    <label><input type="checkbox" name="Напитки" value="Шампанское"> Шампанское</label>
+                    <label><input type="checkbox" name="Напитки" value="Безалкогольное"> Безалкогольное</label>
+                    <label><input type="checkbox" id="drinkOtherCheck" name="Напитки" value="Другое"> Другое</label>
                 </div>
                 <div class="other-drink-input" id="otherDrinkInput">
-                    <input type="text" name="drink_other_text" placeholder="Напишите, что именно...">
+                    <input type="text" name="Другое напиток" placeholder="Напишите, что именно...">
                 </div>
                 <div class="drinks-hint">✔️ Отметьте все варианты, которые вам нравятся</div>
             </div>
             <div class="form-group rsvp-animate">
                 <label>Ваши пожелания или комментарии (аллергии, диета)</label>
-                <input type="text" name="wishes" id="guestWishes" placeholder="Сообщите нам важные детали...">
+                <input type="text" name="Пожелания" id="guestWishes" placeholder="Сообщите нам важные детали...">
             </div>
             <button type="submit" class="submit-btn rsvp-animate">Отправить ответ</button>
         </form>

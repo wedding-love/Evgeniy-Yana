@@ -946,7 +946,7 @@
             </div>
             <button type="submit" class="submit-btn rsvp-animate">Отправить ответ</button>
         </form>
-        <div id="formMessage" class="hidden-message">Спасибо! Ждём вас на нашей свадьбе 🥂</div>
+        <div id="formMessage" class="hidden-message">✅ Спасибо! Ждём вас на нашей свадьбе 🥂</div>
     </div>
 </div>
 
@@ -1123,9 +1123,10 @@
             });
         }
 
-        // ---- ФОРМА ----
+        // ---- ФОРМА С ОЧИСТКОЙ ПОЛЕЙ ----
         const form = document.getElementById('guestForm');
         const messageDiv = document.getElementById('formMessage');
+
         if (form) {
             form.addEventListener('submit', function(e) {
                 const nameInput = document.getElementById('guestName');
@@ -1134,9 +1135,60 @@
                     alert('Пожалуйста, укажите ваше имя');
                     return;
                 }
+                
+                // Показываем сообщение об успешной отправке
                 messageDiv.style.display = 'block';
-                setTimeout(() => { messageDiv.style.display = 'none'; }, 4000);
+                
+                // Очищаем все поля формы через 500ms
+                setTimeout(() => {
+                    form.reset();
+                    // Скрываем поле "Другое"
+                    const otherInputEl = document.getElementById('otherDrinkInput');
+                    if (otherInputEl) {
+                        otherInputEl.classList.remove('active');
+                        otherInputEl.style.display = 'none';
+                    }
+                    const otherCheckEl = document.getElementById('drinkOtherCheck');
+                    if (otherCheckEl) {
+                        otherCheckEl.checked = false;
+                    }
+                }, 500);
+                
+                // Скрываем сообщение через 4 секунды
+                setTimeout(() => { 
+                    messageDiv.style.display = 'none'; 
+                }, 4000);
             });
+        }
+
+        // ---- ОЧИСТКА ФОРМЫ ПРИ ВОЗВРАТЕ СО СТРАНИЦЫ FORMPREE ----
+        if (window.location.search.includes('success=true') || window.location.search.includes('success')) {
+            const form = document.getElementById('guestForm');
+            if (form) {
+                form.reset();
+                const otherInput = document.getElementById('otherDrinkInput');
+                if (otherInput) {
+                    otherInput.classList.remove('active');
+                    otherInput.style.display = 'none';
+                }
+                const otherCheck = document.getElementById('drinkOtherCheck');
+                if (otherCheck) {
+                    otherCheck.checked = false;
+                }
+                // Показываем сообщение
+                const messageDiv = document.getElementById('formMessage');
+                if (messageDiv) {
+                    messageDiv.style.display = 'block';
+                    setTimeout(() => { 
+                        messageDiv.style.display = 'none'; 
+                    }, 4000);
+                }
+                // Убираем параметр из URL
+                if (window.history && window.history.replaceState) {
+                    const cleanUrl = window.location.href.split('?')[0];
+                    window.history.replaceState({}, document.title, cleanUrl);
+                }
+            }
         }
 
         // ---- ФОНОВАЯ МУЗЫКА ----
@@ -1144,11 +1196,8 @@
         bgAudio.volume = 0.5;
         bgAudio.loop = true;
         
-        // Попытка автозапуска при загрузке страницы
         function playAudio() {
             bgAudio.play().catch(function(error) {
-                console.log('Автозапуск заблокирован. Ожидаем взаимодействия.');
-                // Добавляем обработчик на первое касание/клик
                 document.addEventListener('click', function playOnClick() {
                     bgAudio.play().catch(function(e) {});
                     document.removeEventListener('click', playOnClick);
@@ -1160,7 +1209,6 @@
             });
         }
 
-        // Запускаем музыку после небольшой задержки
         setTimeout(playAudio, 500);
 
     })();

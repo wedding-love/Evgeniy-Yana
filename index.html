@@ -914,7 +914,7 @@
                 <label>Нужно ли место для ночлега?</label>
                 <div class="radio-group-vertical">
                     <label><input type="radio" name="overnight" value="yes"> Да, нужно</label>
-                    <label><input type="radio" name="overnight" value="no" checked> Нет, не нужно</label>
+                    <label><input type="radio" name="overnight" value="no"> Нет, не нужно</label>
                 </div>
             </div>
 
@@ -922,7 +922,7 @@
                 <label>Желаете ли остаться на второй день праздника?</label>
                 <div class="radio-group-vertical">
                     <label><input type="radio" name="second_day" value="yes"> Да, с удовольствием!</label>
-                    <label><input type="radio" name="second_day" value="no" checked> Нет, не смогу</label>
+                    <label><input type="radio" name="second_day" value="no"> Нет, не смогу</label>
                 </div>
             </div>
             <div class="form-group rsvp-animate">
@@ -1136,33 +1136,26 @@
                     return;
                 }
                 
-                // Показываем сообщение об успешной отправке
                 messageDiv.style.display = 'block';
                 
-                // Очищаем все поля формы через 500ms
                 setTimeout(function() {
-                    // Сброс всех полей ввода
                     form.reset();
                     
-                    // Сброс всех радиокнопок вручную
                     const allRadios = form.querySelectorAll('input[type="radio"]');
                     allRadios.forEach(function(radio) {
                         radio.checked = false;
                     });
                     
-                    // Сброс всех чекбоксов вручную
                     const allCheckboxes = form.querySelectorAll('input[type="checkbox"]');
                     allCheckboxes.forEach(function(checkbox) {
                         checkbox.checked = false;
                     });
                     
-                    // Сброс всех select
                     const allSelects = form.querySelectorAll('select');
                     allSelects.forEach(function(select) {
                         select.selectedIndex = 0;
                     });
                     
-                    // Скрываем поле "Другое"
                     const otherInputEl = document.getElementById('otherDrinkInput');
                     if (otherInputEl) {
                         otherInputEl.classList.remove('active');
@@ -1175,7 +1168,6 @@
                     
                 }, 500);
                 
-                // Скрываем сообщение через 4 секунды
                 setTimeout(function() { 
                     messageDiv.style.display = 'none'; 
                 }, 4000);

@@ -1123,7 +1123,7 @@
             });
         }
 
-        // ---- ФОРМА С ОЧИСТКОЙ ПОЛЕЙ ----
+        // ---- ФОРМА С ПОЛНОЙ ОЧИСТКОЙ ----
         const form = document.getElementById('guestForm');
         const messageDiv = document.getElementById('formMessage');
 
@@ -1140,50 +1140,87 @@
                 messageDiv.style.display = 'block';
                 
                 // Очищаем все поля формы через 500ms
-                setTimeout(() => {
+                setTimeout(function() {
+                    // Сброс всех полей ввода
                     form.reset();
+                    
+                    // Сброс всех радиокнопок вручную
+                    const allRadios = form.querySelectorAll('input[type="radio"]');
+                    allRadios.forEach(function(radio) {
+                        radio.checked = false;
+                    });
+                    
+                    // Сброс всех чекбоксов вручную
+                    const allCheckboxes = form.querySelectorAll('input[type="checkbox"]');
+                    allCheckboxes.forEach(function(checkbox) {
+                        checkbox.checked = false;
+                    });
+                    
+                    // Сброс всех select
+                    const allSelects = form.querySelectorAll('select');
+                    allSelects.forEach(function(select) {
+                        select.selectedIndex = 0;
+                    });
+                    
                     // Скрываем поле "Другое"
                     const otherInputEl = document.getElementById('otherDrinkInput');
                     if (otherInputEl) {
                         otherInputEl.classList.remove('active');
                         otherInputEl.style.display = 'none';
+                        const otherTextInput = otherInputEl.querySelector('input');
+                        if (otherTextInput) {
+                            otherTextInput.value = '';
+                        }
                     }
-                    const otherCheckEl = document.getElementById('drinkOtherCheck');
-                    if (otherCheckEl) {
-                        otherCheckEl.checked = false;
-                    }
+                    
                 }, 500);
                 
                 // Скрываем сообщение через 4 секунды
-                setTimeout(() => { 
+                setTimeout(function() { 
                     messageDiv.style.display = 'none'; 
                 }, 4000);
             });
         }
 
-        // ---- ОЧИСТКА ФОРМЫ ПРИ ВОЗВРАТЕ СО СТРАНИЦЫ FORMPREE ----
+        // ---- ОЧИСТКА ПРИ ВОЗВРАТЕ ----
         if (window.location.search.includes('success=true') || window.location.search.includes('success')) {
             const form = document.getElementById('guestForm');
             if (form) {
                 form.reset();
+                
+                const allRadios = form.querySelectorAll('input[type="radio"]');
+                allRadios.forEach(function(radio) {
+                    radio.checked = false;
+                });
+                
+                const allCheckboxes = form.querySelectorAll('input[type="checkbox"]');
+                allCheckboxes.forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
+                
+                const allSelects = form.querySelectorAll('select');
+                allSelects.forEach(function(select) {
+                    select.selectedIndex = 0;
+                });
+                
                 const otherInput = document.getElementById('otherDrinkInput');
                 if (otherInput) {
                     otherInput.classList.remove('active');
                     otherInput.style.display = 'none';
+                    const otherTextInput = otherInput.querySelector('input');
+                    if (otherTextInput) {
+                        otherTextInput.value = '';
+                    }
                 }
-                const otherCheck = document.getElementById('drinkOtherCheck');
-                if (otherCheck) {
-                    otherCheck.checked = false;
-                }
-                // Показываем сообщение
+                
                 const messageDiv = document.getElementById('formMessage');
                 if (messageDiv) {
                     messageDiv.style.display = 'block';
-                    setTimeout(() => { 
+                    setTimeout(function() { 
                         messageDiv.style.display = 'none'; 
                     }, 4000);
                 }
-                // Убираем параметр из URL
+                
                 if (window.history && window.history.replaceState) {
                     const cleanUrl = window.location.href.split('?')[0];
                     window.history.replaceState({}, document.title, cleanUrl);

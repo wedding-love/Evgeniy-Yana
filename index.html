@@ -40,6 +40,11 @@
             background-color: #ffffff;
         }
 
+        /* ----- СКРЫТЫЙ ПЛЕЕР ----- */
+        #bgAudio {
+            display: none;
+        }
+
         /* ----- ПЕРВЫЙ ЭКРАН ----- */
         .first-screen {
             position: relative;
@@ -966,10 +971,9 @@
     </div>
 </div>
 
-<!-- ФОНОВАЯ МУЗЫКА (скрытый плеер) -->
-<audio id="bgAudio" loop autoplay>
+<!-- СКРЫТЫЙ АУДИОПЛЕЕР -->
+<audio id="bgAudio" preload="auto" loop>
     <source src="Ed_Sheeran_-_Perfect_47828368 (1).mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает аудио.
 </audio>
 
 <script>
@@ -1135,17 +1139,29 @@
             });
         }
 
-        // ---- ФОНОВАЯ МУЗЫКА (скрытый плеер) ----
+        // ---- ФОНОВАЯ МУЗЫКА ----
         const bgAudio = document.getElementById('bgAudio');
-        // Устанавливаем громкость на 50%
         bgAudio.volume = 0.5;
+        bgAudio.loop = true;
         
-        // Пытаемся запустить музыку автоматически
-        bgAudio.play().catch(function(error) {
-            // Если автозапуск заблокирован браузером, ничего страшного
-            // Пользователь может запустить вручную (но мы скрыли плеер)
-            console.log('Автозапуск музыки заблокирован браузером');
-        });
+        // Попытка автозапуска при загрузке страницы
+        function playAudio() {
+            bgAudio.play().catch(function(error) {
+                console.log('Автозапуск заблокирован. Ожидаем взаимодействия.');
+                // Добавляем обработчик на первое касание/клик
+                document.addEventListener('click', function playOnClick() {
+                    bgAudio.play().catch(function(e) {});
+                    document.removeEventListener('click', playOnClick);
+                }, { once: true });
+                document.addEventListener('touchstart', function playOnTouch() {
+                    bgAudio.play().catch(function(e) {});
+                    document.removeEventListener('touchstart', playOnTouch);
+                }, { once: true });
+            });
+        }
+
+        // Запускаем музыку после небольшой задержки
+        setTimeout(playAudio, 500);
 
     })();
 </script>
